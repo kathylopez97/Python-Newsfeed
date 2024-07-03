@@ -28,6 +28,9 @@ class User(Base):
   
    # encrypt password
    return bcrypt.hashpw(password.encode('utf-8'), salt)
-  
-  
- 
+   # verify password from email
+  def verify_password(self, password):
+   return bcrypt.checkpw(
+    password.encode('utf-8'),
+    self.password.encode('utf-8')
+  )
