@@ -1,12 +1,12 @@
 # import flask 
 from flask import Flask
-# import app routes and dashboard
-from app.routes import home, dashboard 
+# import app routes dashboard and api
+from app.routes import home, dashboard, api
 # import app db to call app from all metadata
 from app.db import init_db
 # implement filters in template files
 from app.utils import filters
-
+from app.routes import home, dashboard, api
 def create_app(test_config=None):
   # set up app config
   app = Flask(__name__, static_url_path='/')
@@ -26,11 +26,10 @@ def create_app(test_config=None):
   def hello():
     return 'hello world'
   
-  # register routes 
+  # register routes home, dashboard and api
   app.register_blueprint(home)
   app.register_blueprint(dashboard)
-
-
+  app.register_blueprint(api)
   # Initialize database
   init_db(app)
 
